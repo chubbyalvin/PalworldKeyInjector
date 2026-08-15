@@ -1,0 +1,21 @@
+LIBRARY KERNEL32.dll
+EXPORTS
+    CloseHandle
+    CreateThread
+    DeleteCriticalSection
+    DisableThreadLibraryCalls
+    EnterCriticalSection
+    GetCurrentProcessId
+    GetModuleFileNameW
+    GetModuleHandleExW
+    GetTickCount64
+    InitializeConditionVariable
+    InitializeCriticalSectionAndSpinCount
+    LeaveCriticalSection
+    SleepConditionVariableCS
+    TlsAlloc
+    TlsFree
+    TlsGetValue
+    TlsSetValue
+    WakeAllConditionVariable
+    WakeConditionVariable
