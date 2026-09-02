@@ -1,7 +1,7 @@
 # Building from source
 
 The short commands are in `README.md`. This document records the details
-needed to reproduce or audit the v1.0 build.
+needed to reproduce or audit the v1.1 build.
 
 ## Generated API files
 
@@ -51,13 +51,14 @@ The MinGW DLL target uses `-nostdlib`, a direct `DllMain` entry, and only
 KERNEL32/USER32. The hosted test executables continue to use the normal
 runtime.
 
-## Official v1.0 release build
+## Official v1.1 release build
 
-The official v1.0 release binary was built in a Linux x86-64 environment with:
+The official v1.1 release binary packaged with this source update was built in
+a Linux x86-64 environment with:
 
-- GCC 13.3.0;
-- GNU ld/objcopy 2.42 with the `i386pep` backend;
-- Python 3.12.13.
+- GCC 14.2.0;
+- GNU ld/objcopy 2.44 with the `i386pep` backend;
+- Python 3.13.5.
 
 The environment did not contain MSVC, MinGW-w64, Wine, or CMake, and did not
 permit installing them. The included `tools/build-gcc-bfd-pe-x64.sh` therefore

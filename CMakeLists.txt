@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(PalworldKeyInjector VERSION 1.0 LANGUAGES C)
+project(PalworldKeyInjector VERSION 1.1 LANGUAGES C)
 
 if(NOT WIN32)
     message(FATAL_ERROR "PalworldKeyInjector.dll must be built for Windows")

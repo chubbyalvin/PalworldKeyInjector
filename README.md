@@ -1,4 +1,4 @@
-# PalworldKeyInjector v1.0
+# PalworldKeyInjector v1.1
 
 PalworldKeyInjector is a small, open-source x64 Windows keyboard-input helper
 for Palworld UE4SS Lua mods. While Palworld owns the foreground window, a mod
@@ -27,9 +27,9 @@ and make arbitrary key values structurally impossible.
 
 ## Runtime safeguards
 
-- The current process executable basename must be exactly
-  `Palworld-Win64-Shipping.exe` (case-insensitive). The caller cannot override
-  it.
+- The current process executable basename must be exactly either
+  `Palworld-Win64-Shipping.exe` (Steam) or `Palworld-WinGDK-Shipping.exe`
+  (Xbox/Game Pass), case-insensitively. The caller cannot override it.
 - Palworld's process must own the foreground window both when a request is
   submitted and immediately before `SendInput` after the delay.
 - Only the keys below and Ctrl/Shift/Alt modifiers exist in the native API.
@@ -188,17 +188,17 @@ Calculate the hash independently:
 Get-FileHash .\dist\PalworldKeyInjector.dll -Algorithm SHA256
 ```
 
-Official v1.0 DLL SHA-256:
+Official v1.1 DLL SHA-256:
 
 ```text
-229feab17545d5ac9f0639b997047f2e53f3e75b9fdefdd80c2e23a63284fbb4
+b041009d33467acef432869d57cfeb24605969b088892f27c3cad642823d437c
 ```
 
-The official v1.0 release binary was compiled directly from this source using
-the documented GCC 13.3.0/GNU Binutils 2.42 freestanding PE-x64 path. The
-compiled DLL is distributed separately through GitHub Releases; this repository
-archive is source-only. MSVC remains the primary supported rebuild path. No
-byte-for-byte equivalence across compilers is claimed.
+The official v1.1 release binary was compiled directly from this source using
+the documented freestanding GCC/GNU Binutils PE-x64 path. The compiled DLL is
+distributed separately through GitHub Releases; this repository archive is
+source-only. MSVC remains the primary supported rebuild path. No byte-for-byte
+equivalence across compilers is claimed.
 
 ## Tests
 

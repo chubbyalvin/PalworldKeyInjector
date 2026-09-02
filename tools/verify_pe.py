@@ -244,9 +244,15 @@ def main() -> int:
     if banner not in image.data:
         raise VerificationError("source version does not match the binary banner")
 
-    expected_host = "Palworld-Win64-Shipping.exe".encode("utf-16le") + b"\0\0"
-    if expected_host not in image.data:
-        raise VerificationError("Palworld host guard string is missing")
+    expected_hosts = [
+        "Palworld-Win64-Shipping.exe",
+        "Palworld-WinGDK-Shipping.exe",
+    ]
+    for expected_host_name in expected_hosts:
+        expected_host = expected_host_name.encode("utf-16le") + b"\0\0"
+        if expected_host not in image.data:
+            raise VerificationError(
+                f"Palworld host guard string is missing: {expected_host_name}")
 
     lower_data = image.data.lower()
     forbidden = [
@@ -264,7 +270,7 @@ def main() -> int:
     print(f"  imports: {len(actual_imports)} exact imports from KERNEL32.dll and USER32.dll")
     print("  mitigations: HIGH_ENTROPY_VA, DYNAMIC_BASE, NX_COMPAT, relocations")
     print(f"  version banner: PalworldKeyInjector {version}")
-    print("  host guard: Palworld-Win64-Shipping.exe")
+    print("  host guards: Palworld-Win64-Shipping.exe, Palworld-WinGDK-Shipping.exe")
     print(f"  SHA-256: {digest}")
     return 0
 

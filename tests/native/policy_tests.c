@@ -75,9 +75,25 @@ static void test_host_guard(void)
     CHECK(palworld_expected_host_path_utf16(path));
     ascii_to_utf16("Palworld-Win64-Shipping.exe", path, 256);
     CHECK(palworld_expected_host_path_utf16(path));
+
+    ascii_to_utf16(
+        "C:\\XboxGames\\Palworld\\Content\\Pal\\Binaries\\WinGDK\\Palworld-WinGDK-Shipping.exe",
+        path, 256);
+    CHECK(palworld_expected_host_path_utf16(path));
+    ascii_to_utf16(
+        "c:\\xboxgames\\palworld\\content\\pal\\binaries\\wingdk\\PALWORLD-WINGDK-SHIPPING.EXE",
+        path, 256);
+    CHECK(palworld_expected_host_path_utf16(path));
+    ascii_to_utf16("Palworld-WinGDK-Shipping.exe", path, 256);
+    CHECK(palworld_expected_host_path_utf16(path));
+
     ascii_to_utf16("C:\\Games\\NotPalworld.exe", path, 256);
     CHECK(!palworld_expected_host_path_utf16(path));
     ascii_to_utf16("C:\\Games\\Palworld-Win64-Shipping.exe.bak", path, 256);
+    CHECK(!palworld_expected_host_path_utf16(path));
+    ascii_to_utf16("C:\\Games\\Palworld-WinGDK-Shipping.exe.bak", path, 256);
+    CHECK(!palworld_expected_host_path_utf16(path));
+    ascii_to_utf16("C:\\XboxGames\\Palworld\\Content\\gamelaunchhelper.exe", path, 256);
     CHECK(!palworld_expected_host_path_utf16(path));
     CHECK(!palworld_expected_host_path_utf16(NULL));
 }

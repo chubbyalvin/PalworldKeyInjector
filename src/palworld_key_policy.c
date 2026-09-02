@@ -13,8 +13,13 @@ PAL_INTERNAL_DATA const pal_key_descriptor PAL_KEYS[PAL_KEY_COUNT] = {
 #undef PAL_KEY_ENTRY
 };
 
-PAL_INTERNAL_DATA const uint16_t PALWORLD_EXPECTED_EXECUTABLE[] = {
+PAL_INTERNAL_DATA const uint16_t PALWORLD_EXPECTED_EXECUTABLE_WIN64[] = {
     'P','a','l','w','o','r','l','d','-','W','i','n','6','4','-',
+    'S','h','i','p','p','i','n','g','.','e','x','e',0
+};
+
+PAL_INTERNAL_DATA const uint16_t PALWORLD_EXPECTED_EXECUTABLE_WINGDK[] = {
+    'P','a','l','w','o','r','l','d','-','W','i','n','G','D','K','-',
     'S','h','i','p','p','i','n','g','.','e','x','e',0
 };
 
@@ -65,6 +70,20 @@ static uint16_t ascii_lower_utf16(uint16_t value)
     return value;
 }
 
+static int palworld_executable_name_matches(
+    const uint16_t *base,
+    const uint16_t *expected)
+{
+    size_t i;
+
+    for (i = 0; expected[i] != 0 || base[i] != 0; ++i) {
+        if (ascii_lower_utf16(expected[i]) != ascii_lower_utf16(base[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int palworld_expected_host_path_utf16(const uint16_t *path)
 {
     const uint16_t *base;
@@ -81,13 +100,10 @@ int palworld_expected_host_path_utf16(const uint16_t *path)
         }
     }
 
-    for (i = 0; PALWORLD_EXPECTED_EXECUTABLE[i] != 0 || base[i] != 0; ++i) {
-        if (ascii_lower_utf16(PALWORLD_EXPECTED_EXECUTABLE[i])
-            != ascii_lower_utf16(base[i])) {
-            return 0;
-        }
-    }
-    return 1;
+    return palworld_executable_name_matches(
+               base, PALWORLD_EXPECTED_EXECUTABLE_WIN64)
+        || palworld_executable_name_matches(
+               base, PALWORLD_EXPECTED_EXECUTABLE_WINGDK);
 }
 
 #undef PAL_INTERNAL_DATA

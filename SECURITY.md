@@ -3,9 +3,9 @@
 ## Intended trust boundary
 
 PalworldKeyInjector narrows an ordinary UE4SS mod helper's accidental and
-reusable capability. It is useful only when loaded into a process named
-`Palworld-Win64-Shipping.exe` and only while that process owns the foreground
-window. It is not a sandbox and cannot make an untrusted native mod safe.
+reusable capability. It is useful only when loaded into an official Palworld client process named
+`Palworld-Win64-Shipping.exe` (Steam) or `Palworld-WinGDK-Shipping.exe`
+(Xbox/Game Pass), and only while that process owns the foreground window. It is not a sandbox and cannot make an untrusted native mod safe.
 
 A malicious in-process mod can call Windows APIs directly or ship another
 DLL. Likewise, an unrelated hostile program can rename its executable to the
@@ -28,9 +28,10 @@ restriction, not process authentication or an anti-malware boundary.
 ### Host confinement
 
 At process attach, `GetModuleFileNameW(NULL, ...)` obtains the current process
-path. Only a case-insensitive basename equal to
-`Palworld-Win64-Shipping.exe` is accepted. There is no caller-supplied target,
-PID, HWND, path, or override.
+path. Only a case-insensitive basename equal to either
+`Palworld-Win64-Shipping.exe` (Steam) or `Palworld-WinGDK-Shipping.exe`
+(Xbox/Game Pass) is accepted. There is no caller-supplied target, PID, HWND,
+path, or override.
 
 ### Foreground confinement
 
